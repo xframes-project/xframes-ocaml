@@ -1,5 +1,30 @@
 open Ctypes
 open Foreign
+open Yojson.Basic
+
+type font_def = { name : string; sizes : int list }
+type single_font_def = { name : string; size : int }
+
+let font_defs =
+  let defs = [
+    { name = "roboto-regular"; sizes = [16; 18; 20; 24; 28; 32; 36; 48] }
+  ] in
+  List.flatten (
+    List.map (fun { name; sizes } ->
+      List.map (fun size -> { name; size }) sizes
+    ) defs
+  )
+
+(* Convert a single_font_def to JSON *)
+let single_font_def_to_json { name; size } =
+  `Assoc [("name", `String name); ("size", `Int size)]
+let font_defs_to_json font_defs =
+  `List (List.map single_font_def_to_json font_defs)
+
+let font_defs_assoc_array = font_defs_to_json font_defs
+let font_defs_json = pretty_to_string font_defs_assoc_array
+
+let () = print_endline font_defs_json
 
 let on_init_callback = (funptr (void @-> returning void))
 let on_text_changed_callback = (funptr (int @-> string @-> returning void))
@@ -48,7 +73,7 @@ let on_click id =
 let () =
   init 
     "./assets" 
-    "{}" 
+    font_defs_json
     "{}"
     on_init 
     on_text_changed 

@@ -1,6 +1,8 @@
 (executable
  (public_name xframes)
  (name main)
- (libraries xframes ctypes ctypes.foreign)
+ (libraries xframes ctypes ctypes.foreign yojson)
  (flags
-  (:standard -thread -cclib)))
+  (:standard -thread))
+ (link_flags
+  (:standard -cclib -lstdc++)))
