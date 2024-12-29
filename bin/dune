@@ -1,0 +1,6 @@
+(executable
+ (public_name xframes)
+ (name main)
+ (libraries xframes ctypes ctypes.foreign)
+ (flags
+  (:standard -thread -cclib)))
