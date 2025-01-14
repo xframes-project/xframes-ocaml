@@ -222,7 +222,12 @@ let on_boolean_value_changed_callback = (funptr (int @-> bool @-> returning void
 let on_multiple_numeric_values_changed_callback = (funptr (int @-> ptr float @-> int @-> returning void))
 let on_click_callback = (funptr (int @-> returning void))
 
-let xframeslib = Dl.dlopen ~filename:"xframesshared.dll" ~flags:[Dl.RTLD_NOW]
+let os = Sys.os_type
+let xframes_path = match os with 
+  | "Unix" -> "libxframesshared.so"
+  | _ -> "xframesshared.dll"
+
+let xframeslib = Dl.dlopen ~filename:xframes_path ~flags:[Dl.RTLD_NOW]
 
 let setElement =
   foreign ~from:xframeslib "setElement" (string @-> returning void)
