@@ -43,3 +43,7 @@ Debian Trixie
 
 ![Screenshot From 2025-01-14 19-42-12](https://github.com/user-attachments/assets/9cb87ed5-f9e6-4065-aded-3c4cb6cbb61c)
 
+Raspberry Pi 5
+
+![20250114_20h04m35s_grim](https://github.com/user-attachments/assets/2903135b-98d4-4013-914c-9263c48a6bfc)
+
